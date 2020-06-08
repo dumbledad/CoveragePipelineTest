@@ -22,4 +22,8 @@ The coverage section of our build pipeline appears to check that functions are t
 we attain 100% coverage when there is at least one unit test that exercises each function, regardless of whether or not the
 tests pass.
 
+## Correction
+The final commit adds code to the script to save the output of the unit test run and to check
+for failed tests
+
 ##### Tim Regan, 8th June 2020
