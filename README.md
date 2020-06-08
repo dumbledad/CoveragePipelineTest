@@ -24,6 +24,17 @@ tests pass.
 
 ## Correction
 The final commit adds code to the script to save the output of the unit test run and to check
-for failed tests
-
+for failed tests. The key change is to swap this
+```
+find ./ -name 'test_*.py' | xargs -n 1 coverage run -a --include=$INCLUDE
+```
+to this
+```
+(find ./ -name 'test_*.py' | xargs -n 1 coverage run -a --include=$INCLUDE) 2>&1 | tee tmp.testing.txt
+FAILS=$(awk '/FAIL/ {print $2; exit}' tmp.testing.txt)
+if [ "$FAILS" != 0 ]
+then echo Some unit tests fail.
+        exit 1
+fi
+```
 ##### Tim Regan, 8th June 2020
